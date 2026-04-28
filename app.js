@@ -1,11 +1,12 @@
 import express from 'express';
-// import router from './routes/board';
-
+import boardRouter from './routes/board.js';
 
 const app = express();
 const port = 8080;
 
-import boardRouter from './routes/board.js';
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use('/api/board', boardRouter);
 
 app.get('/', (erq, res) => {
