@@ -34,16 +34,16 @@ router.put('/updateone.json', async (req, res) => {
     }
 });
 
-// url => GET 127.0.0.1:8081/api/board/selectlist.json
+// url => GET 127.0.0.1:8080/api/board/selectlist.json
 router.get('/selectlist.json', async (req, res) => {
     try {
-        const { title, content, writer } = req.body;
         const sql = 'select b.* from board b';
         const [result] = await pool.query(sql);
-        console.log(result);
+        console.log("selectlist", result);
         return res.send({ result: result });
     }
     catch (err) {
+        console.log(err);
         return res.send({ err: err });
     }
 });
