@@ -8,8 +8,17 @@ const router = express.Router();
 //body => {"title": "제목", "content": "내용", "writer": "글쓴이" }
 router.post('/insert.json', async (req, res) => {
     //json or send both are good
-    console.log(req.body);
-    return res.json({ result: 'ok' });
+
+    try {
+        const { title, content, writer } = req.body;
+        const sql = 'insert into board (title, content, writer) values (?, ?, ?)';
+        const result = await pool.query(sql, [title, content, writer]);
+        console.log(result);
+        return res.json({ result: result[0] });
+    }
+    catch (err) {
+        return res.send({ err: err });
+    }
 });
 
 export default router;
