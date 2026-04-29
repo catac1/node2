@@ -1,5 +1,6 @@
 import express from 'express';
 import boardRouter from './routes/board.js';
+import customerRouter from './routes/customer.js';
 
 const app = express();
 const port = 8080;
@@ -9,6 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/board', boardRouter);
+app.use('/api/customer', customerRouter);
 
 app.get('/', (erq, res) => {
     res.send({ result: 'Hello World!' });

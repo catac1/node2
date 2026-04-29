@@ -1,6 +1,5 @@
 import express from 'express';
 import pool from '../db.js';
-
 const router = express.Router();
 
 // url => DELETE 127.0.0.1:8080/api/board/deleteone.json
