@@ -1,6 +1,7 @@
 import express from 'express';
 import pool from '../db.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -18,7 +19,8 @@ router.post('/login.do', async (req, res) => {
             console.log("이메일 일치");
             if (await bcrypt.compare(password, result[0].password)) {
                 console.log("암호 일치");
-                return res.send({ result: 1 });
+                const token = jwt.sign({ email: email }, 'this is a private key');
+                return res.send({ result: token });
             }
         }
         return res.send({ result: 0 });
